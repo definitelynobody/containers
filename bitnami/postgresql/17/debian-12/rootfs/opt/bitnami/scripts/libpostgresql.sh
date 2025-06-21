@@ -689,7 +689,7 @@ postgresql_initialize() {
     postgresql_set_property "port" "$POSTGRESQL_PORT_NUMBER"
     is_empty_value "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION" || postgresql_set_property "default_toast_compression" "$POSTGRESQL_DEFAULT_TOAST_COMPRESSION"
     is_empty_value "$POSTGRESQL_PASSWORD_ENCRYPTION" || postgresql_set_property "password_encryption" "$POSTGRESQL_PASSWORD_ENCRYPTION"
-    if ! is_dir_empty "$POSTGRESQL_DATA_DIR"; then
+    if ! is_mounted_dir_empty "$POSTGRESQL_DATA_DIR"; then
         info "Deploying PostgreSQL with persisted data..."
         export POSTGRESQL_FIRST_BOOT="no"
         is_boolean_yes "$create_pghba_file" && postgresql_restrict_pghba
